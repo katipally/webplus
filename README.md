@@ -3,7 +3,7 @@
 Make any AI coding agent fetch the **latest, official, verified** information from the web instead of answering from stale training memory or random blog spam. It's one [Agent Skill](https://agentskills.io) (a `SKILL.md`) that rides on the web tools your agent already has, so it stays out of the way until a task actually needs current facts, then it spends searches smartly and cites sources with dates.
 
 ```bash
-npx webplus
+npx @katipally/webplus
 ```
 
 ## What it does
@@ -25,12 +25,12 @@ No API key, no extra server. The skill is plain Markdown.
 `SKILL.md` is an open standard, so web+ installs the same skill folder into each tool's own skills directory.
 
 ```bash
-npx webplus               # wizard: pick project or global scope, then the agents
-npx webplus init --all    # every supported tool, non-interactive
-npx webplus init --only claude,agents,cursor
-npx webplus init --global # machine-wide (~/.claude/skills, ~/.agents/skills, ...)
-npx webplus list          # show the catalog and what's detected
-npx webplus remove        # delete only web+'s skill folder, nothing else
+npx @katipally/webplus               # wizard: pick project or global scope, then the agents
+npx @katipally/webplus init --all    # every supported tool, non-interactive
+npx @katipally/webplus init --only claude,agents,cursor
+npx @katipally/webplus init --global # machine-wide (~/.claude/skills, ~/.agents/skills, ...)
+npx @katipally/webplus list          # show the catalog and what's detected
+npx @katipally/webplus remove        # delete only web+'s skill folder, nothing else
 ```
 
 Scope is asked per run; `--global` / `--local` set it for scripts. Re-running is idempotent. `remove` deletes only our own `webplus/` folder (verified by its frontmatter) and never touches your other skills.

@@ -1,5 +1,5 @@
 {
-  "name": "webplus",
+  "name": "@katipally/webplus",
   "version": "0.1.0",
   "description": "web+ — make any AI agent fetch the latest, official, verified info from the web instead of answering from memory. One Agent Skill (SKILL.md), installed into every tool's skills directory via npx. Spends searches smartly, cites sources with dates.",
   "bin": {
