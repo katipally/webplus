@@ -8,15 +8,15 @@ npx @katipally/webplus
 
 ## What it does
 
-When a task depends on current or external facts (software versions, releases, API/library docs, pricing, news, events, people, orgs, standards), the skill auto-triggers and makes the agent:
+When a task depends on current or external facts (software versions, releases, API and library docs, pricing, news, events, people, orgs, standards), the skill triggers and makes the agent:
 
-- **Get the real date first** — from the system clock or an authoritative timestamp, never its assumed "today," then judge recency against that.
-- **Go to the primary source** — official docs, vendor sites, GitHub releases, standards bodies, the org's own announcement. Never content farms, SEO spam, or AI-generated filler.
-- **Cross-verify** — confirm in two independent reputable sources before stating a fact; otherwise label it unconfirmed.
-- **Be exact** — quote the precise version string or number, and distinguish stable from beta.
-- **Never assume** — if access fails or sources conflict, say so and mark the gap unknown instead of guessing.
-- **Stay unbiased and cite** — represent sources faithfully, surface disagreement, link every fresh claim with its date.
-- **Spend searches wisely** — search only what the question needs, one precise query over many vague ones, fetch only the page that answers it, and stop once it's verified. No tangents, no off-topic detours.
+- Get the real date first, from the system clock or an authoritative timestamp, never an assumed "today," then judge recency against it.
+- Go to the primary source: official docs, vendor sites, GitHub releases, standards bodies, the org's own announcement, not content farms or SEO spam.
+- Cross-verify a fact in two independent reputable sources before stating it, otherwise label it unconfirmed.
+- Quote the exact version string or number, and tell stable apart from beta.
+- Never assume. If access fails or sources conflict, say so and mark the gap unknown instead of guessing.
+- Represent each source faithfully, surface disagreement, and link every fresh claim with its date.
+- Spend searches on the question: one precise query over many vague ones, fetch only the page that answers it, stop once it's verified.
 
 No API key, no extra server. The skill is plain Markdown.
 
@@ -53,7 +53,7 @@ The `.agents/skills` entry is the cross-tool open standard, read by Codex, Goose
 | JetBrains Junie | `.junie/skills/` | `~/.junie/skills/` |
 | Amp | `.agents/skills/` | `~/.config/agents/skills/` |
 | Kiro | `.kiro/skills/` | `~/.kiro/skills/` |
-| TRAE | `.trae/skills/` | — (project only) |
+| TRAE | `.trae/skills/` | (project only) |
 | Tabnine | `.tabnine/agent/skills/` | `~/.tabnine/agent/skills/` |
 | Factory (Droid) | `.factory/skills/` | `~/.factory/skills/` |
 

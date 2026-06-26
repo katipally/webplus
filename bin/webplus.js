@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-// webplus (web+) — install one Agent Skill that makes any agent fetch the latest, official,
+// webplus (web+): install one Agent Skill that makes any agent fetch the latest, official,
 // verified info from the web (its own web tools) instead of answering from memory.
 // Writes a SKILL.md folder into each tool's native skills directory. Vendor-neutral,
 // npx-only, zero dependencies. SKILL.md is an open standard read by many tools.
@@ -15,7 +15,7 @@ const ROOT = path.join(__dirname, '..');
 const VERSION = require(path.join(ROOT, 'package.json')).version;
 const SKILL_SRC = path.join(ROOT, 'src', 'skill', 'webplus', 'SKILL.md');
 const SKILL_NAME = 'webplus';   // the installed skill folder name
-const SKILL_ID = 'webplus';     // frontmatter name — used to verify a folder is ours
+const SKILL_ID = 'webplus';     // frontmatter name, used to verify a folder is ours
 
 const home = (...p) => path.join(os.homedir(), ...p);
 
@@ -25,7 +25,7 @@ const home = (...p) => path.join(os.homedir(), ...p);
 // cross-tool open standard read by Codex, Goose, OpenHands and others, so the `agents` entry
 // covers all three; Amp also reads it at project scope but has its own global path.
 const TARGETS = [
-  { id: 'agents',   label: '.agents/skills — universal standard', project: '.agents/skills', global: home('.agents', 'skills'),
+  { id: 'agents',   label: '.agents/skills (universal standard)', project: '.agents/skills', global: home('.agents', 'skills'),
     pre: true, keywords: 'codex openai goose block openhands universal standard agents', detect: () => exists('.agents') },
   { id: 'claude',   label: 'Claude Code', project: '.claude/skills', global: home('.claude', 'skills'),
     pre: true, keywords: 'anthropic claude', detect: () => exists('.claude') },
@@ -173,7 +173,7 @@ function applyInstall(scope, targets, styled = false) {
     for (const r of results) gline(`${c.green(S.tick)} ${c.gray(r.action.padEnd(8))} ${displayPath(r.dir)}/SKILL.md`);
     return;
   }
-  console.log(`webplus v${VERSION} — installed the skill into:`);
+  console.log(`webplus v${VERSION} installed the skill into:`);
   for (const r of results) console.log(`  ${r.action.padEnd(8)} ${displayPath(r.dir)}/SKILL.md`);
   console.log('\nDone. Open a new agent session to pick up the skill.');
   console.log('Undo anytime with: npx webplus remove');
@@ -204,10 +204,10 @@ function applyRemove(scope, targets, styled = false) {
     return;
   }
   if (removed.length) {
-    console.log('webplus — removed the skill from:');
+    console.log('webplus removed the skill from:');
     for (const d of removed) console.log('  ' + d);
   } else {
-    console.log('webplus — nothing to remove (no managed skill found).');
+    console.log('webplus found no managed skill to remove.');
   }
 }
 
@@ -260,7 +260,7 @@ function checklist({ message, items, input = process.stdin, output = process.std
       let out = `${c.cyan(S.step, output)}  ${c.bold(message, output)}  ${c.gray('(' + selected.size + ' selected)', output)}\n`;
       out += `${c.gray(S.bar, output)}  ${c.gray('search', output)} ${search}\n`;
       if (!list.length) {
-        out += `${c.gray(S.bar, output)}  ${c.yellow('no matches — keep typing or ⌫ to clear', output)}\n`;
+        out += `${c.gray(S.bar, output)}  ${c.yellow('no matches, keep typing or ⌫ to clear', output)}\n`;
       } else {
         if (start > 0) out += `${c.gray(S.bar, output)}  ${c.gray('↑ ' + start + ' more', output)}\n`;
         for (let i = start; i < end; i++) {
@@ -401,7 +401,7 @@ async function runInstallWizard(opts) {
       hint: noPath ? 'no path at this scope' : ((detected && !t.pre) ? 'detected' : (t.tag || null)),
     };
   });
-  const selected = await checklist({ message: `Select agents (${scope}) — type to search`, items });
+  const selected = await checklist({ message: `Select agents (${scope}), type to search`, items });
   const targets = resolveTargets(selected, scope);
   if (!targets.length) { outro(c.yellow('Nothing to install (none selected, or no path at this scope).')); return; }
 
@@ -457,8 +457,8 @@ async function cmdInit(opts) {
   }
   const { scope, targets } = nonInteractiveTargets(opts);
   if (!process.stdin.isTTY && !opts.all && !opts.only)
-    console.log('(no interactive terminal — installing detected defaults; use --all/--only to choose)');
-  if (!targets.length) { console.log('webplus — nothing to install (no detected agents; try --all or --only).'); return; }
+    console.log('(no interactive terminal, installing detected defaults; use --all/--only to choose)');
+  if (!targets.length) { console.log('webplus found no agents to install into (try --all or --only).'); return; }
   applyInstall(scope, targets);
 }
 
@@ -476,10 +476,10 @@ async function cmdRemove(opts) {
 }
 
 function cmdList() {
-  console.log(`webplus v${VERSION} — skills-compatible agent catalog:`);
+  console.log(`webplus v${VERSION} skills-compatible agent catalog:`);
   for (const t of TARGETS) {
     const on = t.pre || t.detect();
-    const g = t.global ? displayPath(skillDirOf(t, 'global')) : '—';
+    const g = t.global ? displayPath(skillDirOf(t, 'global')) : 'n/a';
     console.log(`  [${on ? 'x' : ' '}] ${t.id.padEnd(9)} project: ${(t.project + '/webplus').padEnd(30)} global: ${g}${t.detect() && !t.pre ? '  (detected)' : ''}`);
   }
   console.log('\n[x] = pre-selected/detected on a bare `init`. `npx webplus` for the wizard,');
@@ -503,7 +503,7 @@ function parse(argv) {
   return opts;
 }
 
-const HELP = `webplus v${VERSION} — make any agent fetch the latest, official, verified info.
+const HELP = `webplus v${VERSION}. Make any agent fetch the latest, official, verified info.
 
   npx webplus                 Interactive wizard: pick scope + agents, then install
   npx webplus init            Same wizard (auto-detects your agents)

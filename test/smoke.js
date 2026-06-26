@@ -46,7 +46,7 @@ try {
   assert.strictEqual(fs.readFileSync(claudeSkill, 'utf8'), skill, 'installed skill drifted from source');
   ok('installed SKILL.md matches the source');
 
-  // 4. idempotent — re-run does not duplicate or error
+  // 4. idempotent: re-run does not duplicate or error
   run(['init', '--only', 'claude', '--local', '--yes'], dir);
   assert.strictEqual(api.planAction(path.join(dir, '.claude', 'skills', 'webplus')), 'update', 'should report update');
   assert.strictEqual(api.planAction(path.join(dir, '.nope', 'skills', 'webplus')), 'create', 'should report create');

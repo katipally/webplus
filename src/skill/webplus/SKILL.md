@@ -9,7 +9,7 @@ description: >
 license: MIT
 ---
 
-# web+ — get the latest, official, verified facts
+# web+: get the latest, official, verified facts
 
 Use the web tools this agent already has: web search, fetch, or native browse.
 
